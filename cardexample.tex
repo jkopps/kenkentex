@@ -2,16 +2,22 @@
 \usepackage{tikz}
 \usepackage{mathpazo}
 \usepackage{xcolor}
-
 \usepackage{verbatim}
+% \usepackage{geometry}
+% \usepackage[itemsep=0pt]{enumitem}
+
+% No indentation
+\setlength{\parindent}{0cm}
+% Reduce distance between bullets
+% \addtolength{\itemsep}{-0.5\baselineskip}
+% \setlength{\itemsep}{0cm}
 
 \newcounter{row}
 \newcounter{col}
 
+% Scaling factor for KenKen grid
 \edef\puzzlescale{1.2}
 \edef\numrows{4}
-
-  \addtolength{\itemsep}{-0.5\baselineskip}
 
 \newcommand\setrow[\numrows]{
   \setcounter{col}{1}
@@ -49,7 +55,7 @@
 \begin{document}
 
 \begin{center}
-  \large \textbf{John Doe and Jane Dee}
+  \Large \textbf{John Doe and Jane Dee}
 
   Table ?
 \end{center}
@@ -62,9 +68,20 @@ play includes the quoted line.  Have fun!
 
 \medskip
 
-\begin{minipage}[top]{0.5\textwidth}
-  \textit{To be, or not to be?}
+\begin{minipage}[center]{0.58\textwidth}
+
+  \bigskip
+  
+  \parbox{0.85\textwidth}{
+    \it
+  \noindent
+    ``To be, or not to be?  That is the question.
+    \phantom{``}To be, or not to be?  That is the question.
+    \phantom{``}To be, or not to be?  That is the question.''
+  }
+
   \begin{enumerate}
+    \setlength{\itemsep}{1pt}
   \item Hamlet
   \item A Midsummer Night's Dream
   \item Romeo and Juliet
@@ -72,7 +89,7 @@ play includes the quoted line.  Have fun!
   \end{enumerate}
 \end{minipage}
 %
-\begin{minipage}[top]{0.5\textwidth}
+\begin{minipage}[center]{0.38\textwidth}
 \begin{tikzpicture}[scale=\puzzlescale]
 
   \begin{scope}
@@ -104,8 +121,15 @@ play includes the quoted line.  Have fun!
 \end{tikzpicture}
 \end{minipage}
 %
+%% \begin{minipage}{0.05\textwidth}
+%%   \begin{flushright}
+%%     a
+%%     \end{flushright}
+%% \end{minipage}
 
-Rules for KenKen: Fill in the boxes with the numbers 1 through 4, with
+\bigskip
+
+\textit{Rules for KenKen}: Fill in the boxes with the numbers 1 through 4, with
 each number appearing exactly once in every row and column.  Each
 ``cage'' (set of boxes outlined in bold) has a target number
 and mathematical operation in the top-left; combining each
