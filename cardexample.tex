@@ -14,14 +14,28 @@
 % Scaling factor for KenKen grid
 \edef\puzzlescale{1.2}
 \edef\numrows{4}
+\edef\numargs{8}
 
-\newcommand\setrow[\numrows]{
+\newcommand\setrow[\numargs]{
   \setcounter{col}{1}
   \foreach \n in {#1, #2, #3, #4} {
     \edef\x{\value{col} - 1}
     \edef\y{1 + \numrows - \value{row}}
     \node[anchor=north west,scale=0.75*\puzzlescale] at (\x, \y) {\n};
     \stepcounter{col}
+  }
+
+  \ifthenelse{\equal{\showPuzzle}{false} }{
+    \setcounter{col}{1}
+    \foreach \n in {#5, #6, #7, #8} {
+      \edef\x{\value{col} - 1}
+      \edef\y{1 + \numrows - \value{row}}
+      \node[anchor=center, scale=\puzzlescale] at (\x+0.5, \y-0.5) {\n };
+      \stepcounter{col}
+    }
+  }
+  {
+     % false - do nothing
   }
   \stepcounter{row}
 }
@@ -83,13 +97,19 @@ play includes the quoted line.  Have fun!
     \phantom{``}To be, or not to be?  That is the question.''
   }
 
-  \begin{enumerate}
+    \begin{enumerate}
     \setlength{\itemsep}{1pt}
-  \item Twelfth Night
-  \item A Midsummer Night's Dream
-  \item Romeo and Juliet
-  \item Hamlet
-  \end{enumerate}
+    \ifthenelse{ \equal{\showPuzzle}{true}  } {  
+    \item Twelfth Night
+    \item A Midsummer Night's Dream
+    \item Romeo and Juliet
+    \item Hamlet
+    }
+    {
+    \setcounter{enumi}{3}
+    \item \textbf{Hamlet}, Act x, Scene y
+    }
+\end{enumerate}
 \end{minipage}
 %
 \begin{minipage}[center]{0.38\textwidth}
@@ -113,10 +133,10 @@ play includes the quoted line.  Have fun!
     \boldv{0}{4}{4}
 
     \setcounter{row}{1}
-    \setrow {$8\times$} {} {$4+$} {}
-    \setrow {$3$} {$2\div$} {} {$1$}
-    \setrow {$2-$} {} {$6+$} {}
-    \setrow {$5+$} {} {$1-$} {}
+    \setrow {$8\times$} {} {$4+$} {} {2} {4} {1} {3} 
+    \setrow {$3$} {$2\div$} {} {$1$} {3} {2} {4} {1} 
+    \setrow {$2-$} {} {$6+$} {} {1} {3} {2} {4} 
+    \setrow {$5+$} {} {$1-$} {} {4} {1} {3} {2} 
     
   \end{scope}
 
