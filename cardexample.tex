@@ -4,14 +4,18 @@
 \usepackage{xcolor}
 \usepackage{verbatim}
 \usepackage{ifthen}
-\usepackage[paperwidth=6in,paperheight=5in,top=0.55in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
+% \usepackage[paperwidth=6in,paperheight=5in,top=0.55in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
+
+\usepackage[paperwidth=6in,paperheight=5in,top=0.55in,bottom=0.5in,left=0.5in,right=0.5in,showframe]{geometry}
+
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}
+\pgfpageslogicalpageoptions{1}{rotation=180}
+
+\pgfpagesphysicalpageoptions{physical height=5in, physical width=6in}
 
 % No indentation
 \setlength{\parindent}{0cm}
-
-% \setlength{\headsep}{0cm}
-% \addtolength{\textheight}{\footskip}
-% \setlength{\footskip}{0cm}
 
 % no page numbers
 \pagenumbering{gobble}
@@ -174,6 +178,20 @@ number in the cage with the operation must result in the target.
 }
 
 \begin{document}
+
+\begin{titlepage}
+\vspace*{\fill}
+\begin{center}
+\textbf{\Large John Doe and Jane Dee}
+
+\medskip
+
+{\large Table ?}
+\end{center}
+\vspace*{\fill}
+\end{titlepage}
+
+\pagebreak
 
 \tableHamlet{true}
 
