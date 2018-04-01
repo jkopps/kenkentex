@@ -10,12 +10,15 @@
 
 \usepackage{pgfpages}
 \pgfpagesuselayout{2 on 1}
-\pgfpageslogicalpageoptions{1}{rotation=180}
-
-\pgfpagesphysicalpageoptions{physical height=5in, physical width=6in}
+\pgfpageslogicalpageoptions{1}{rotation=180,resized height=0.5\pgfphysicalheight}
+\pgfpageslogicalpageoptions{2}{resized height=0.5\pgfphysicalheight}
+\pgfpagesphysicalpageoptions{physical height=\paperwidth, physical width=\paperheight}
 
 % No indentation
 \setlength{\parindent}{0cm}
+
+\setlength{\headheight}{0cm}
+\setlength{\footskip}{0cm}
 
 % no page numbers
 \pagenumbering{gobble}

@@ -117,17 +117,42 @@
 
 \newcommand{\thetablename}{}
 
+\renewcommand{\puzzleGrid}{
+
+  \shadebox{2}{2} % value = 2
+
+  \draw [very thin] (0, 0) grid (4, 4);
+  \boldh{0}{0}{4}
+  \boldh{1}{1}{3}
+  \boldh{2}{1}{3}
+  \boldh{3}{0}{3}
+  \boldh{4}{0}{4}
+  \boldv{0}{0}{4}
+  \boldv{0}{1}{3}
+  \boldv{1}{2}{1}
+  \boldv{3}{2}{1}
+  \boldv{2}{3}{1}
+  \boldv{0}{4}{4}
+
+  \setcounter{row}{1}
+  \setrow {$6+$} {$12\times$} {} {} {2} {1} {3} {4}
+  \setrow {} {$2$} {$3-$} {} {3} {2} {4} {1}
+  \setrow {} {$2\div$} {} {$6+$} {1} {4} {2} {3}
+  \setrow {$1-$} {} {} {} {4} {3} {2} {1}
+}
+
 %% @depends \puzzleQuote
 %% @depends \puzzleListItems
 %% @depends \puzzleListSolution
 %% @depends \puzzleGrid
 \newcommand{\puzzleBody}{
 
-\begin{minipage}[center]{0.58\textwidth}
+\begin{minipage}[center]{0.62\textwidth}
 
   \bigskip
   
   \parbox{0.85\textwidth}{
+      \raggedright
       \noindent
       \textit{\puzzleQuote}
   }
@@ -218,55 +243,34 @@
 
 \pagebreak
 
-\hspace{0pt}
-
 } % \makePuzzleCard
+
+\input{playPuzzles}
 
 \begin{document}
 
-\renewcommand{\puzzleQuote}{
-``To be or not to be, that is the question. \linebreak
-To be or not to be, that is the question.''
-}
+\setPuzzleHamlet
+\makePuzzleCard{John Doe and Jane Dee}
 
-\renewcommand{\puzzleListItems}{
-    \item Item the first
-    \item Item the second
-    \item Item the third
-    \item Item the fourth
-} % \puzzleListItems
+\setPuzzleMuchAdo
+\makePuzzleCard{John Doe and Jane Dee}
 
-\renewcommand{\puzzleListSolution}{
-    \setcounter{enumi}{2}
-    \item \textbf{PlayName}, Act x, Scene y
-} % \puzzleListSolution
+\setPuzzleTwelfthNight
+\makePuzzleCard{John Doe and Jane Dee}
 
-\renewcommand{\puzzleGrid}{
+\setPuzzleRomeoAndJuliet
+\makePuzzleCard{John Doe and Jane Dee}
 
-  \shadebox{2}{2} % value = 2
+\setPuzzleTamingOfTheShrew
+\makePuzzleCard{John Doe and Jane Dee}
 
-  \draw [very thin] (0, 0) grid (4, 4);
-  \boldh{0}{0}{4}
-  \boldh{1}{1}{3}
-  \boldh{2}{1}{3}
-  \boldh{3}{0}{3}
-  \boldh{4}{0}{4}
-  \boldv{0}{0}{4}
-  \boldv{0}{1}{3}
-  \boldv{1}{2}{1}
-  \boldv{3}{2}{1}
-  \boldv{2}{3}{1}
-  \boldv{0}{4}{4}
+\setPuzzleMidsummerNights
+\makePuzzleCard{John Doe and Jane Dee}
 
-  \setcounter{row}{1}
-  \setrow {$6+$} {$12\times$} {} {} {2} {1} {3} {4}
-  \setrow {} {$2$} {$3-$} {} {3} {2} {4} {1}
-  \setrow {} {$2\div$} {} {$6+$} {1} {4} {2} {3}
-  \setrow {$1-$} {} {} {} {4} {3} {2} {1}
-}
+\setPuzzleAsYouLikeIt
+\makePuzzleCard{John Doe and Jane Dee}
 
-\renewcommand{\thetablename}{TableName}
-
+\setPuzzleAntonyAndCleopatra
 \makePuzzleCard{John Doe and Jane Dee}
 
 \end{document}
