@@ -1,0 +1,271 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{mathpazo}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{ifthen}
+\usepackage[paperwidth=6in,paperheight=5in,top=0.55in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
+
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}
+% \pgfpageslogicalpageoptions{1}{rotation=180,resized height=0.5\pgfphysicalheight}
+% \pgfpageslogicalpageoptions{2}{resized height=0.5\pgfphysicalheight}
+% \pgfpagesphysicalpageoptions{physical height=\paperwidth, physical width=\paperheight}
+
+% kill margins
+\setlength{\headheight}{0cm}
+\setlength{\footskip}{0cm}
+
+% No indentation
+\setlength{\parindent}{0cm}
+
+% no page numbers
+\pagenumbering{gobble}
+
+\newcounter{row}
+\newcounter{col}
+
+% Scaling factor for KenKen grid
+\edef\puzzlescale{1.2}
+\edef\numrows{4}
+\edef\numargs{8}
+
+\newcommand\setrow[\numargs]{
+  \setcounter{col}{1}
+  \foreach \n in {#1, #2, #3, #4} {
+    \edef\x{\value{col} - 1}
+    \edef\y{1 + \numrows - \value{row}}
+    \node[anchor=north west,scale=0.75*\puzzlescale] at (\x, \y) {\n};
+    \stepcounter{col}
+  }
+
+  \ifthenelse{\equal{\showPuzzle}{false} }{
+    \setcounter{col}{1}
+    \foreach \n in {#5, #6, #7, #8} {
+      \edef\x{\value{col} - 1}
+      \edef\y{1 + \numrows - \value{row}}
+      \node[anchor=center, scale=\puzzlescale] at (\x+0.5, \y-0.5) {\n };
+      \stepcounter{col}
+    }
+  }
+  {
+     % false - do nothing
+  }
+  \stepcounter{row}
+} % \setrow
+
+\newcommand\boldh[3]{
+  \edef\y{\numrows-#1}
+  \edef\x{#2}
+  \edef\z{\x + #3}
+  \draw[ultra thick] (\x, \y) -- (\z, \y);
+} % \boldh
+
+\newcommand\boldv[3]{
+  \edef\y{\numrows-#1}
+  \edef\x{#2}
+  \edef\z{\y - #3}
+  \draw[ultra thick] (\x, \y) -- (\x, \z);
+} % \boldv
+
+\definecolor{shadegray}{gray}{0.75}
+
+\newcommand\shadebox[2]{
+  \edef\y{\numrows-#1}
+  \edef\x{#2}
+  \fill[shadegray] (\x, \y) rectangle (\x+1,\y-1);
+} % \shadebox
+
+\newcommand{\puzzleAddress}[1]{
+  \begin{titlepage}
+  \vspace*{\fill}
+  \begin{center}
+  \textbf{\Large #1}
+      
+  \medskip
+
+  {\large Table ?}
+  \end{center}
+  \vspace*{\fill}
+  \end{titlepage}
+} % \puzzleAddress
+
+%% \puzzlePrologue
+%% @depends \showPuzzle
+\newcommand{\puzzlePrologue}{
+  \ifthenelse{ \equal{\showPuzzle}{true}  } {
+  Hello, friends! 
+  Your table is named for one of the four Shakespeare plays listed
+  below.  To find which, solve the KenKen puzzle, and the number in the
+  shaded box will indicate your table.  Or, just identify which
+  play includes the quoted line.  Have fun!
+  }
+  {
+  \begin{center}             
+    \large \textbf{Solution}
+  \end{center}
+  }
+} % \puzzlePrologue
+
+\newcommand{\puzzleQuote}{The Quote}
+
+\newcommand{\puzzleListItems}{\item An Item}
+
+\newcommand{\puzzleListSolution}{\item The answer, Act x, Scene y}
+
+\newcommand{\puzzleGrid}{}
+
+\newcommand{\thetablename}{}
+
+%% @depends \puzzleQuote
+%% @depends \puzzleListItems
+%% @depends \puzzleListSolution
+%% @depends \puzzleGrid
+\newcommand{\puzzleBody}{
+
+\begin{minipage}[center]{0.58\textwidth}
+
+  \bigskip
+  
+  \parbox{0.85\textwidth}{
+      \noindent
+      \textit{\puzzleQuote}
+  }
+
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \ifthenelse{ \equal{\showPuzzle}{true}  }
+  {
+      \puzzleListItems
+  }
+  {
+      \puzzleListSolution
+  }
+  \end{enumerate}
+\end{minipage}
+%
+\begin{minipage}[center]{0.38\textwidth}
+\begin{tikzpicture}[scale=\puzzlescale]
+
+  \begin{scope}
+
+    \puzzleGrid
+    
+  \end{scope}
+
+\end{tikzpicture}
+\end{minipage}
+} % \puzzleBody
+
+%% true=show puzzle, false=show solution
+\newcommand{\showPuzzle}{true}
+
+%% \puzzleEpilogue{\showPuzzle}
+%% @depends \thetablename
+%% @depends \showPuzzle
+\newcommand{\puzzleEpilogue}{
+  \ifthenelse{ \equal{\showPuzzle}{true}  } 
+  {
+    \textbf{Rules for KenKen}: Fill in the boxes with the numbers 1 through 4, 
+    with each number appearing exactly once in every row and column.  Each
+    ``cage'' (set of boxes outlined in bold) has a target number
+    and mathematical operation in the top-left; combining each
+    number in the cage with the operation must result in the target.
+    \textit{Hint}: For cages with no operation, just fill in the target number.
+
+    \begin{center}   
+      \textit{Solutions may be found on the inside of the card.}
+    \end{center}
+  }
+  {
+   \begin{center}
+     \large \textit{See you at Table \thetablename!}
+   \end{center}
+  }
+} % \puzzleEpilogue
+
+%% @depends \showPuzzle
+\newcommand{\makepuzzle}{
+
+\puzzlePrologue
+
+\medskip
+
+\puzzleBody
+
+\bigskip
+
+\puzzleEpilogue
+
+} % \makepuzzle
+
+%% @depends \thetablename
+\newcommand{\makePuzzleCard}[1]{
+
+\renewcommand{\showPuzzle}{true}
+
+\makepuzzle
+
+\pagebreak
+
+\puzzleAddress{#1}
+
+\pagebreak
+
+\renewcommand{\showPuzzle}{false}
+
+\makepuzzle
+
+\pagebreak
+
+\hspace{0pt}
+
+} % \makePuzzleCard
+
+\begin{document}
+
+\renewcommand{\puzzleQuote}{
+``To be or not to be, that is the question. \linebreak
+To be or not to be, that is the question.''
+}
+
+\renewcommand{\puzzleListItems}{
+    \item Item the first
+    \item Item the second
+    \item Item the third
+    \item Item the fourth
+} % \puzzleListItems
+
+\renewcommand{\puzzleListSolution}{
+    \setcounter{enumi}{3}
+    \item \textbf{PlayName}, Act x, Scene y
+} % \puzzleListSolution
+
+\renewcommand{\puzzleGrid}{
+    \shadebox{1}{2}
+    
+    \draw [very thin] (0, 0) grid (4, 4);
+    \boldh{0}{0}{4}
+    \boldh{1}{0}{4}
+    \boldh{2}{0}{4}
+    \boldh{3}{0}{4}
+    \boldh{4}{0}{4}
+    \boldv{0}{0}{4}
+    \boldv{1}{3}{1}
+    \boldv{1}{1}{1}
+    \boldv{0}{2}{1}
+    \boldv{2}{2}{2}
+    \boldv{0}{4}{4}
+
+    \setcounter{row}{1}
+    \setrow {$8\times$} {} {$4+$} {} {2} {4} {1} {3} 
+    \setrow {$3$} {$2\div$} {} {$1$} {3} {2} {4} {1} 
+    \setrow {$2-$} {} {$6+$} {} {1} {3} {2} {4} 
+    \setrow {$5+$} {} {$1-$} {} {4} {1} {3} {2}
+}
+
+\renewcommand{\thetablename}{TableName}
+
+\makePuzzleCard{John Doe and Jane Dee}
+
+\end{document}
