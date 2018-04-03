@@ -6,12 +6,6 @@
 \usepackage{ifthen}
 \usepackage[paperwidth=6in,paperheight=5in,top=0.55in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
 
-% \usepackage{pgfpages}
-% \pgfpagesuselayout{2 on 1}
-% \pgfpageslogicalpageoptions{1}{rotation=180,resized height=0.5\pgfphysicalheight}
-% \pgfpageslogicalpageoptions{2}{resized height=0.5\pgfphysicalheight}
-% \pgfpagesphysicalpageoptions{physical height=\paperwidth, physical width=\paperheight}
-
 % kill margins
 \setlength{\headheight}{0cm}
 \setlength{\footskip}{0cm}
@@ -229,11 +223,11 @@
 
 \renewcommand{\showPuzzle}{true}
 
-\makepuzzle
+\puzzleAddress{#1}
 
 \pagebreak
 
-\puzzleAddress{#1}
+\makepuzzle
 
 \pagebreak
 
@@ -244,33 +238,3 @@
 \pagebreak
 
 } % \makePuzzleCard
-
-\input{playPuzzles}
-
-\begin{document}
-
-\setPuzzleHamlet
-\makePuzzleCard{John Doe and Jane Dee}
-
-\setPuzzleMuchAdo
-\makePuzzleCard{John Doe and Jane Dee}
-
-\setPuzzleTwelfthNight
-\makePuzzleCard{John Doe and Jane Dee}
-
-\setPuzzleRomeoAndJuliet
-\makePuzzleCard{John Doe and Jane Dee}
-
-\setPuzzleTamingOfTheShrew
-\makePuzzleCard{John Doe and Jane Dee}
-
-\setPuzzleMidsummerNights
-\makePuzzleCard{John Doe and Jane Dee}
-
-\setPuzzleAsYouLikeIt
-\makePuzzleCard{John Doe and Jane Dee}
-
-\setPuzzleAntonyAndCleopatra
-\makePuzzleCard{John Doe and Jane Dee}
-
-\end{document}

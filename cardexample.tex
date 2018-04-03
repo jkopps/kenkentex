@@ -4,20 +4,20 @@
 \usepackage{xcolor}
 \usepackage{verbatim}
 \usepackage{ifthen}
-% \usepackage[paperwidth=6in,paperheight=5in,top=0.55in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
-
 \usepackage[paperwidth=6in,paperheight=5in,top=0.55in,bottom=0.5in,left=0.5in,right=0.5in,showframe]{geometry}
 
 \usepackage{pgfpages}
-\pgfpagesuselayout{2 on 1}
-\pgfpageslogicalpageoptions{1}{rotation=180,resized height=0.5\pgfphysicalheight}
-\pgfpageslogicalpageoptions{2}{resized height=0.5\pgfphysicalheight}
-\pgfpagesphysicalpageoptions{physical height=\paperwidth, physical width=\paperheight}
+\pgfpagesuselayout{resize to}[physical paper
+  height=\paperheight,physical paper width=\paperwidth,border shrink=0mm]
+\pgfpagesphysicalpageoptions{physical height=\paperheight, physical width=\paperwidth}
+\pgfpageslogicalpageoptions{1}{resized height=\pgfphysicalheight}
+
 
 % No indentation
 \setlength{\parindent}{0cm}
 
 \setlength{\headheight}{0cm}
+% \setlength{\voffset}{0in}
 \setlength{\footskip}{0cm}
 
 % no page numbers

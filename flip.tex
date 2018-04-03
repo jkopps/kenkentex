@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{calc}
+\usepackage{pdfpages}
+\usepackage[paperwidth=6in,paperheight=5in,top=0in,bottom=0in,left=0in,right=0in]{geometry}
+
+\begin{document}
+
+\newcommand{\docname}{guestpuzzles.pdf}
+
+\def\numcards{8}
+\newcounter{cardcounter}
+\newcounter{pagecounter}
+\stepcounter{cardcounter}
+\stepcounter{pagecounter}
+
+\whiledo{\not{\value{cardcounter}>\numcards}}{
+  \includepdf[pages={\thepagecounter},angle=180,noautoscale]{\docname}
+  \stepcounter{pagecounter}
+  \includepdf[pages={\thepagecounter},noautoscale]{\docname}
+  \stepcounter{pagecounter}
+  \includepdf[pages={\thepagecounter,{}},angle=180,noautoscale]{\docname}
+  \stepcounter{pagecounter}
+\stepcounter{cardcounter}
+}
+
+\end{document}
